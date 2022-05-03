@@ -30,7 +30,7 @@ router.get("/:id", (req, res) => {
     status: selected.status,
     time: selected.time,
     country: selected.country,
-    gameId: selected.gameId,
+    // gameId: selected.gameId,
   });
 });
 
@@ -76,7 +76,7 @@ router.post("/", (req, res) => {
   res.status(200).send(req.body);
 });
 
-router.put("/:id/edit", (req, res) => {
+router.put("/:id", (req, res) => {
   let fullPlayersData = pullData(playersList);
   let id = req.params.id;
   let index = fullPlayersData.findIndex((player) => player.id === id);
@@ -84,13 +84,13 @@ router.put("/:id/edit", (req, res) => {
 
   let updatedPlayer = {
     id: id,
-    gameId: uuidv1(),
-    country: req.body.country,
+    // gameId: uuidv1(),
+    // country: req.body.country,
     playerName: req.body.playerName,
-    description: req.body.description,
+    // description: req.body.description,
     points: req.body.points,
-    status: req.body.status,
-    time: req.body.time,
+    // status: req.body.status,
+    // time: req.body.time,
   };
   fullPlayersData[index] = updatedPlayer;
 
