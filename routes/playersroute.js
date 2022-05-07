@@ -62,9 +62,9 @@ router.post("/", (req, res) => {
     country: req.body.country,
     playerName: req.body.playerName,
     description: req.body.description,
-    points: req.body.points,
-    status: req.body.status,
     time: req.body.time,
+    status: req.body.status,
+    points: req.body.points,    
   };
 
   fullPlayersData.push(newPlayer);
@@ -73,7 +73,7 @@ router.post("/", (req, res) => {
     if (err) throw err;
   });
 
-  res.status(200).send(req.body);
+  res.status(200).send(newPlayer);
 });
 
 router.put("/:id", (req, res) => {
@@ -81,16 +81,21 @@ router.put("/:id", (req, res) => {
   let id = req.params.id;
   let index = fullPlayersData.findIndex((player) => player.id === id);
   // let warehouseID = req.body.warehouse;
-
+  let playerData = fullPlayersData.filter((player) => player.id === id);
+  // console.log(index)
+  
+ 
   let updatedPlayer = {
     id: id,
     // gameId: uuidv1(),
-    // country: req.body.country,
+    country: playerData[0].country,
     playerName: req.body.playerName,
-    // description: req.body.description,
+    description: playerData[0].description,
+    
+
+    time: req.body.time,
+    status: playerData[0].status,
     points: req.body.points,
-    // status: req.body.status,
-    // time: req.body.time,
   };
   fullPlayersData[index] = updatedPlayer;
 
