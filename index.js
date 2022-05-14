@@ -7,15 +7,14 @@ app.use(bodyParser.json())
 require("dotenv").config();
 
 const port = process.env.PORT || process.argv[2] || 2000;
-// const warehouseRoutes = require("./routes/warehousesroute");
 const playersRoute = require("./routes/playersroute");
 const data = require('./public/data/players.json');
 
 //Server test to see what methods are being called at which endpoints
-app.use((req, _, next) => {
-  console.log(`${req.method}: ${req.url}`);
-  next();
-});
+// app.use((req, _, next) => {
+//   console.log(`${req.method}: ${req.url}`);
+//   next();
+// });
 
 //Node libraries to ensure pages load properly
 app.use(express.json());
@@ -27,7 +26,7 @@ app.use(
     extended: true
   })
 )
-// app.use("/warehouses", warehouseRoutes);
+
 app.use("/players", playersRoute);
 
 app.listen(port, () => {
