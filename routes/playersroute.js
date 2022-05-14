@@ -18,6 +18,7 @@ router.get("/", (_, res) => {
   res.json(pullData(playersList));
 });
 
+// GET PLAYER WITH ID
 router.get("/:id", (req, res) => {
   const fullPlayersData = pullData(playersList);
   const selected = fullPlayersData.find((item) => item.id === req.params.id);
@@ -30,9 +31,10 @@ router.get("/:id", (req, res) => {
     status: selected.status,
     time: selected.time,
     country: selected.country,
-    // gameId: selected.gameId,
   });
 });
+
+// DELETE ROTE FOR FUTURE ADMIN ACCESS
 
 // router.delete("/:id", (req, res) => {
 //   let fullPlayersData = pullData(playersList);
@@ -48,17 +50,12 @@ router.get("/:id", (req, res) => {
 //   });
 // });
 
+// POST NEW PLAYER ON FORM SUBMIT
 router.post("/", (req, res) => {
-  // const fullWarehouseData = pullData(warehouseList);
   const fullPlayersData = pullData(playersList);
-  // const selectedPlayer = fullPlayersData.find(
-  //   (player) => player.playerName === req.body.playerName
-  // );
-  // const selectedId = selectedPlayer.id;
-
+  
   let newPlayer = {
     id: uuidv1(),
-    // warehouseID: selectedId,
     country: req.body.country,
     playerName: req.body.playerName,
     description: req.body.description,
@@ -76,23 +73,18 @@ router.post("/", (req, res) => {
   res.status(200).send(newPlayer);
 });
 
+// UPDATE PLAYER POINTS ON GAMEOVER
 router.put("/:id", (req, res) => {
   let fullPlayersData = pullData(playersList);
   let id = req.params.id;
   let index = fullPlayersData.findIndex((player) => player.id === id);
-  // let warehouseID = req.body.warehouse;
   let playerData = fullPlayersData.filter((player) => player.id === id);
-  // console.log(index)
   
- 
   let updatedPlayer = {
     id: id,
-    // gameId: uuidv1(),
     country: playerData[0].country,
     playerName: req.body.playerName,
     description: playerData[0].description,
-    
-
     time: req.body.time,
     status: playerData[0].status,
     points: req.body.points,
